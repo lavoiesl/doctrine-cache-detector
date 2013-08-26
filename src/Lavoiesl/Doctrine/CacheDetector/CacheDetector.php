@@ -20,6 +20,10 @@ class CacheDetector
         }
     }
 
+    /**
+     * List of all detectors (without checking if installed and supported)
+     * @return array
+     */
     public function getAllDetectors()
     {
         $detectors = array();
