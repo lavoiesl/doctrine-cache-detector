@@ -32,7 +32,7 @@ class MemcachedDetector extends MemcacheDetector
         $class = static::getCacheClass();
         $cache = new $class;
 
-        $cache->setMemcache($this->memcache);
+        $cache->setMemcached($this->memcache);
 
         return $cache;
     }

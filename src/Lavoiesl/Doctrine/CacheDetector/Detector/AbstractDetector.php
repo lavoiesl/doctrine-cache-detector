@@ -99,8 +99,9 @@ abstract class AbstractDetector
     public static function getCacheClass()
     {
         $class = get_called_class();
+        $class = preg_replace('/^'.addslashes(__NAMESPACE__).'\\\\([a-z]+)Detector/i', self::DOCTRINE_NAMESPACE . '\\\\' . '$1Cache', $class);
 
-        return preg_replace('/^'.__NAMESPACE__.'\\\\([a-z]+)Detector/i', self::DOCTRINE_NAMESPACE . '\\Cache', $class);
+        return $class;
     }
 
     /**
