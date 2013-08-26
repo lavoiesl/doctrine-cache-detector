@@ -27,7 +27,7 @@ if (isset($detectors['Apc'])) {
 ## Todo
 
  * Add support for MongoDB, Couchbase and Riak.
- * Add feature detection to select the best available driver.
+ * Add better data for performance
 
 ## Author
 

@@ -2,11 +2,11 @@
 
 require 'vendor/autoload.php';
 
-use Lavoiesl\Doctrine\CacheDetector\CacheDetector;
+use Lavoiesl\Doctrine\CacheDetector\CacheChooser;
 use Lavoiesl\Doctrine\CacheDetector\Detector\ApcDetector;
 
 ApcDetector::createAPCuAliases();
 
-$detector = new CacheDetector;
+$chooser = new CacheChooser;
 
-print_r($detector->getSupportedDetectors());
+print_r($chooser->selectBest());

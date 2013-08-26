@@ -13,6 +13,35 @@ abstract class AbstractDetector
      */
     protected $config = array();
 
+    /**
+     * Used to determine the best cache to use.
+     * Higher is better.
+     * Maximum is 10
+     *
+     * @var integer
+     */
+    protected $performance = array(
+        'read_throughput'  => 5,
+        'read_latency'     => 5,
+        'write_throughput' => 5,
+        'write_latency'    => 5,
+    );
+
+    protected static $persistance_level = AbstractDetector::PERSISTANCE_REQUEST;
+
+    /**
+     * Persistance levels
+     * Request: will live only for this request
+     * Service: will live until a service is restarted
+     * Service: will live until the OS is rebooted
+     * Permanent: will live until cleared
+     */
+    const PERSISTANCE_REQUEST         = 0;
+    const PERSISTANCE_LOCAL_SERVICE   = 1;
+    const PERSISTANCE_LOCAL_REBOOT    = 2;
+    const PERSISTANCE_LOCAL_PERMANENT = 3;
+    const PERSISTANCE_DISTRIBUTED     = 4;
+
     const DOCTRINE_NAMESPACE = 'Doctrine\Common\Cache';
 
     /**
@@ -114,5 +143,15 @@ abstract class AbstractDetector
         $class = static::getCacheClass();
 
         return new $class;
+    }
+
+    public function getPerformanceData()
+    {
+        return $this->performance;
+    }
+
+    public static function getPersistanceLevel()
+    {
+        return static::$persistance_level;
     }
 }

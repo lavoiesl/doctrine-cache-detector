@@ -6,6 +6,13 @@ use \Redis;
 
 class RedisDetector extends ServerDetector
 {
+    protected $performance = array(
+        'read_throughput'  => 6,
+        'read_latency'     => 6,
+        'write_throughput' => 6,
+        'write_latency'    => 6,
+    );
+
     protected $redis;
 
     protected $config = array(

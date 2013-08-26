@@ -6,6 +6,13 @@ use \Memcache;
 
 class MemcacheDetector extends ServerDetector
 {
+    protected $performance = array(
+        'read_throughput'  => 3,
+        'read_latency'     => 3,
+        'write_throughput' => 3,
+        'write_latency'    => 3,
+    );
+
     protected $memcache;
 
     protected $config = array(

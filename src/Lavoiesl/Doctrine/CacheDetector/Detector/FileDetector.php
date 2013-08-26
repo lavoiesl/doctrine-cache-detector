@@ -4,6 +4,15 @@ namespace Lavoiesl\Doctrine\CacheDetector\Detector;
 
 abstract class FileDetector extends AbstractDetector
 {
+    protected static $persistance_level = AbstractDetector::PERSISTANCE_LOCAL_PERMANENT;
+
+    protected $performance = array(
+        'read_throughput'  => 1,
+        'read_latency'     => 1,
+        'write_throughput' => 1,
+        'write_latency'    => 1,
+    );
+
     protected $config = array(
         'extension' => null
     );

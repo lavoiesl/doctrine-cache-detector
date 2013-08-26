@@ -6,6 +6,13 @@ use \Memcached;
 
 class MemcachedDetector extends MemcacheDetector
 {
+    protected $performance = array(
+        'read_throughput'  => 4,
+        'read_latency'     => 4,
+        'write_throughput' => 4,
+        'write_latency'    => 4,
+    );
+
     protected function getInitClass()
     {
         return 'Memcached';

@@ -4,6 +4,8 @@ namespace Lavoiesl\Doctrine\CacheDetector\Detector;
 
 abstract class ServerDetector extends AbstractDetector
 {
+    protected static $persistance_level = AbstractDetector::PERSISTANCE_DISTRIBUTED;
+
     /**
      * Initializes underlying cache interface
      *
