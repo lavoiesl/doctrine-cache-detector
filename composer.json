@@ -6,7 +6,7 @@
         "doctrine/cache": "*"
     },
     "autoload": {
-        "psr-0": {"Lavoiesl\\Doctrine\\CacheDetector": "src/"}
+        "psr-4": {"Lavoiesl\\Doctrine\\CacheDetector\\": "src/"}
     },
     "license": "MIT",
     "authors": [
