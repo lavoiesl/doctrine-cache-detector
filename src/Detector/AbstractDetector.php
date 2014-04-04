@@ -58,6 +58,13 @@ abstract class AbstractDetector
         return $this->featureExists();
     }
 
+    public function getType()
+    {
+        preg_match('/([a-zA-Z]+)Detector$/', get_class($this), $matches);
+
+        return $matches[1];
+    }
+
     /**
      * Test if the required PHP libraries exist
      *

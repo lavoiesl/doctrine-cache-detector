@@ -7,11 +7,18 @@ use \ReflectionClass;
 
 class CacheChooser
 {
-    protected $configs = array();
+    private $detectors = array();
+
+    public function __construct()
+    {
+        $this->loadDefaultDetectors();
+    }
 
     public function setConfig($type, array $config)
     {
-        $this->configs[$type] = $config;
+        if (isset($this->detectors[$type])) {
+            $this->detectors[$type]->setConfig($config);
+        }
     }
 
     public function setConfigs(array $configs)
@@ -21,31 +28,31 @@ class CacheChooser
         }
     }
 
+    public function addDetector(AbstractDetector $detector)
+    {
+        $type = $detector->getType();
+        $this->detectors[$type] = $detector;
+    }
+
+    protected function loadDefaultDetectors()
+    {
+        foreach (glob(__DIR__ . '/Detector/*.php') as $file) {
+            $class = __NAMESPACE__ . '\\Detector\\' . basename($file, '.php');
+            $reflector = new ReflectionClass($class);
+
+            if (!$reflector->isAbstract()) {
+                $this->addDetector(new $class);
+            }
+        }
+    }
+
     /**
      * List of all detectors (without checking if installed and supported)
      * @return array
      */
     public function getAllDetectors()
     {
-        $detectors = array();
-
-        foreach (glob(__DIR__ . '/Detector/*.php') as $file) {
-            $class = __NAMESPACE__ . '\\Detector\\' . basename($file, '.php');
-            $reflector = new ReflectionClass($class);
-
-            if (!$reflector->isAbstract()) {
-                $type = basename($file, 'Detector.php');
-                $detector = new $class;
-
-                if (!empty($this->configs[$type])) {
-                    $detector->setConfig($this->configs[$type]);
-                }
-
-                $detectors[$type] = $detector;
-            }
-        }
-
-        return $detectors;
+        return $this->detectors;
     }
 
     public function getSupportedDetectors($persistance_level = AbstractDetector::PERSISTANCE_LOCAL_SERVICE)
