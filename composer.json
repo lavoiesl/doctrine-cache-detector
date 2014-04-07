@@ -8,6 +8,9 @@
     "autoload": {
         "psr-4": {"Lavoiesl\\Doctrine\\CacheDetector\\": "src/"}
     },
+    "suggest": {
+        "lavoiesl/doctrine-cache-provider": "Library to add a Doctrine Provider to allow Doctrine Cache to connect to databases."
+    },
     "license": "MIT",
     "authors": [
         {
