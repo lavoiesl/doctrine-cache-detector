@@ -5,10 +5,17 @@
     "require": {
         "doctrine/cache": "*"
     },
+    "require-dev": {
+        "lavoiesl/doctrine-cache-provider": "*"
+    },
     "autoload": {
-        "psr-4": {"Lavoiesl\\Doctrine\\CacheDetector\\": "src/"}
+        "psr-4": {
+            "Lavoiesl\\Doctrine\\CacheDetector\\": "src/",
+            "Lavoiesl\\Doctrine\\CacheDetector\\Test\\": "tests/"
+        }
     },
     "suggest": {
+        "lavoiesl/apc-polyfill": "Tiny script to create APC aliases when APCu is present but APC support is not emulated.",
         "lavoiesl/doctrine-cache-provider": "Library to add a Doctrine Provider to allow Doctrine Cache to connect to databases."
     },
     "license": "MIT",

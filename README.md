@@ -12,9 +12,9 @@ This can be useful for varying development environments.
 
 ```php
 <?php
-use Lavoiesl\Doctrine\CacheDetector\CacheChooser;
+use Lavoiesl\Doctrine\CacheDetector\CacheDetector;
 
-$cache_detector = new CacheChooser;
+$cache_detector = new CacheDetector;
 $detectors = $cache_detector->getSupportedDetectors();
 
 /**

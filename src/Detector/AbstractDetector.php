@@ -58,19 +58,12 @@ abstract class AbstractDetector
         return $this->featureExists();
     }
 
-    public function getType()
-    {
-        preg_match('/([a-zA-Z]+)Detector$/', get_class($this), $matches);
-
-        return $matches[1];
-    }
-
     /**
      * Test if the required PHP libraries exist
      *
      * @return bool
      */
-    protected function featureExists()
+    public function featureExists()
     {
         if ($extension = $this->getExtension()) {
             return extension_loaded($extension);
@@ -85,6 +78,26 @@ abstract class AbstractDetector
         }
 
         return true;
+    }
+
+    /**
+     * Apart from being supported, is the cache available (i.e. able to connect to server)
+     * 
+     * This is splited from isSupported to allow slower tests to be done only if the Cache is considered.
+     * For example, if APC is prefered over memcache, it will not try to connect to the memcache server.
+     *
+     * @return boolean
+     */
+    public function isAvailable()
+    {
+        return true;
+    }
+
+    public function getType()
+    {
+        preg_match('/([a-zA-Z]+)Detector$/', get_class($this), $matches);
+
+        return $matches[1];
     }
 
     /**

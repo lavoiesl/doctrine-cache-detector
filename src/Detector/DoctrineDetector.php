@@ -33,6 +33,8 @@ class DoctrineDetector extends ServerDetector
         if (strlen($this->config['table']) == 0) {
             return false;
         }
+
+        return $this->config['doctrine']->connect();
     }
 
     public static function getCacheClass()

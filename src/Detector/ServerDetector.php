@@ -14,8 +14,8 @@ abstract class ServerDetector extends AbstractDetector
      */
     abstract protected function connect();
 
-    public function isSupported()
+    public function isAvailable()
     {
-        return parent::isSupported() && $this->connect();
+        return $this->connect();
     }
 }

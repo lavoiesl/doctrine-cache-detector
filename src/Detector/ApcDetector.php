@@ -2,6 +2,8 @@
 
 namespace Lavoiesl\Doctrine\CacheDetector\Detector;
 
+use Lavoiesl\APCPolyfill\APCPolyfill;
+
 class ApcDetector extends AbstractDetector
 {
     protected static $persistance_level = AbstractDetector::PERSISTANCE_LOCAL_SERVICE;
@@ -18,13 +20,12 @@ class ApcDetector extends AbstractDetector
         return 'apc_fetch';
     }
 
-    /**
-     * Dirty hack to create missing APC functions provided by APCu (PHP 5.5)
-     */
     public static function createAPCuAliases()
     {
-        if (!function_exists('apc_fetch') && function_exists('apcu_fetch')) {
-            require dirname(__DIR__) . '/apcu_aliases.php';
+        if (class_exists('Lavoiesl\APCPolyfill\APCPolyfill')) {
+            APCPolyfill::createAliases();
+        } else {
+            throw new \RuntimeException(__METHOD__ . ' requires lavoiesl/apc-polyfill');
         }
     }
 }
